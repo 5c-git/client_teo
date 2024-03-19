@@ -1,0 +1,54 @@
+@import 'src/utils/utils';
+
+.trade {
+  color: $main-dark;
+  background-color: $main-white;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    border-bottom: 1px $line-color solid;
+    gap: 30px;
+  }
+
+  &__form-wrapper {
+    overflow-y: hidden;
+    overflow-x: auto;
+
+    &--block {
+      overflow: visible;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    min-width: 100%;
+    border: 0;
+    border-spacing: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  &__cell-head {
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    font-family: var(--ui-font-family-primary, var(--ui-font-family-helvetica));
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px $line-color solid;
+  }
+
+  &__table-title {
+    display: inline-block;
+    width: 100%;
+    padding-right: 15px;
+    text-align: left;
+
+    &--right {
+      text-align: right;
+    }
+  }
+}

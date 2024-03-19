@@ -1,0 +1,47 @@
+@import 'src/utils/utils';
+
+.total {
+  padding: 15px;
+
+  &__wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__table {
+    font: 14px var(--ui-font-family-primary, var(--ui-font-family-helvetica));
+    color: var(--crm-product-list-dark-color);
+  }
+
+  &__row {
+    text-align: right;
+  }
+
+  &__cell {
+    width: 300px;
+    padding-bottom: 10px;
+    text-align: right;
+    font: inherit;
+
+    &--price {
+      width: 200px;
+      color: var(--crm-product-list-light-color);
+    }
+
+    &--title {
+      font-size: 150%;
+    }
+
+    &--big {
+      border-top: 1px $line-color solid;
+      font-family: var(--ui-font-family-secondary, var(--ui-font-family-open-sans));
+      font-weight: var(--ui-font-weight-semi-bold, 600);
+      font-size: 21px;
+      padding-top: 10px;
+    }
+  }
+
+  &__value {
+    color: var(--crm-product-list-dark-color);
+  }
+}

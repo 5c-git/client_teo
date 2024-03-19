@@ -1,0 +1,96 @@
+button(type='button').addTradeOne Добавить готовые товары
+button(type='button').addTradeTwo Добавить новый товар
+button(type='button').removeTradeOne Удалить первый товар
+
+section.trade
+  include ../trade-card/trade-card
+  form.trade__form
+    div.trade__header
+      div.trade__exchange-rate
+        include ../exchange-rate/exchange-rate
+
+      div.trade__type
+        include ../trade-type/trade-type
+
+    div.trade__form-wrapper
+      table.trade__table
+        tr.trade__table-header
+
+          th(style="width: 50px;" rowspan='2').trade__cell-head
+            span.trade__table-title.trade__table-title--right № 
+
+          th(style="width: 350px;" rowspan='2').trade__cell-head
+            span.trade__table-title Наименование позиции
+
+          th(style="width: 200px;" rowspan='2').trade__cell-head
+            span.trade__table-title.trade__table-title--right Ед. измерения
+            
+          th(style="width: 200px;" rowspan='2').trade__cell-head
+            span.trade__table-title.trade__table-title--right Цена за единицу
+
+          th(style="width: 2600px;" colspan='13').trade__cell-head
+            span.trade__table-title Закупка
+
+          th(style="width: 1000px;" colspan='5').trade__cell-head
+            span.trade__table-title Продажа
+
+        tr.trade__table-header
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Количество
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Производитель
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Поставщик
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Дата поставки
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Цена закупки за ед.
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Базис закупки
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Вид транспорта
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Расходы на закупку: Транспорт рубли
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Расходы на закупку: Транспорт валюта
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Расходы на закупку: Пошлина + ЕТП
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Расходы на закупку: Страхование
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Декларирование
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Себестоимость за ед.
+
+
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Норма прибыли (%)
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Цена продажи за ед.
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Стоимость товара без НДС
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right НДС
+
+          th(style="width: 200px;").trade__cell-head
+            span.trade__table-title.trade__table-title--right Стоимость товара с НДС
+
+  div.trade__total
+    include ../total/total

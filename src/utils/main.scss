@@ -1,0 +1,97 @@
+@import 'src/utils/utils';
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  font-size: 0;
+  clip: rect(0 0 0 0);
+}
+
+.static {
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  display: flex;
+  min-width: 320px;
+  min-height: calc(var(--vh, 1vh) * 100);
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
+  color: #111111;
+  background-color: #eef2f4;
+  box-sizing: border-box;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+main {
+  flex-grow: 1;
+}
+
+a {
+  text-underline-position: under;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-right: 50px;
+  padding-left: 50px;
+  box-sizing: border-box;
+
+  @media(max-width: 1300px) {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  @media(max-width: 767px) {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}

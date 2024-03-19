@@ -1,0 +1,29 @@
+div.total
+  div.total__wrapper
+    table.total__table
+      tr.total__row
+        th(colspan='2').total__cell.total__cell--title Закупка
+      tr.total__row
+        th.total__cell Цена закупки: Сумма цены закупки за ед.:
+        td(data-name='UF_PURCHASE_PRICE_SUM').total__cell.total__cell--price #[span(class='total__value') 0.00] евр
+      tr.total__row
+        th.total__cell Транспортные расходы:  Сумма транспортных расходов:
+        td(data-name='').total__cell.total__cell--price #[span(class='total__value') 0.00] евр
+      tr.total__row
+        th.total__cell Расходы на пошлину: Сумма расходов на пошлину:
+        td(data-name='UF_PURCHASE_DUTY_SUM').total__cell.total__cell--price #[span(class='total__value') 0.00] евр
+      tr.total__row
+        th.total__cell Расходы на страхование: Сумма расходов на страхование:	
+        td(data-name='UF_PURCHASE_INSURANCE_SUM').total__cell.total__cell--price #[span(class='total__value') 0.00] евр
+      tr.total__row
+        th.total__cell Себестоимость закупки: Сумма себестоимости за ед.:	
+        td(data-name='UF_COST_PER_UNIT_SUM').total__cell.total__cell--price #[span(class='total__value') 0.00] евр
+
+      tr.total__row
+        th(colspan='2').total__cell.total__cell--title Продажа
+      tr.total__row
+        th.total__cell Стоимость товара без НДС: Сумма Стоимость товара без НДС:
+        td(data-name='UF_PRODUCT_PRICE_NO_NDS_SUM').total__cell.total__cell--price #[span(class='total__value') 0.00] евр
+      tr.total__row
+        th.total__cell Норма прибыли:  (Стоимость товара без НДС / Себестоимость закупки - 1) * 100:	
+        td(data-name='PROFIT_RATE').total__cell.total__cell--price #[span(class='total__value') 0.00] %

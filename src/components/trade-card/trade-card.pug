@@ -1,0 +1,175 @@
+template#trade-card
+  tr.trade-card
+    td.trade-card__cell
+      span.trade-card__number
+
+    td.trade-card__cell
+      fieldset(data-name='UF_POS_NAME').trade-card__field
+        div.trade-card__input-inner
+          input(type='text' name='Название товара' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+
+    td.trade-card__cell
+      fieldset(data-name='UF_UNIT').trade-card__field
+        select(name="Ед. измерения").trade-card__select
+          option(value="часы") часы
+          option(value="месяц") месяц
+          option(value="квартал") квартал
+          option(value="шт" selected) шт
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PRICE').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' value='' name='Цена за ед.').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB" selected) руб
+          option(value="EUR") евр
+          option(value="USD") дол
+          option(value="AED") дрх
+          option(value="CNY") юань
+
+
+    td.trade-card__cell
+      fieldset(data-name='UF_QUANTITY').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Количество' value='1' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+
+    td.trade-card__cell
+      fieldset(data-name='UF_MANUFACTURER').trade-card__field
+        select(name="Производитель").trade-card__select
+          option(value="1" selected) Россия
+          option(value="2") Беларусь
+          option(value="3") Китай
+          option(value="4") Казахстан
+          option(value="5") Турция
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PROVIDER').trade-card__field
+        select(name="Поставщик").trade-card__select
+          option(value="1" selected) Россия
+          option(value="2") Беларусь
+          option(value="3") Китай
+          option(value="4") Казахстан
+          option(value="5") Турция
+
+    td.trade-card__cell
+      fieldset(data-name='UF_DELIVERY_DATE').trade-card__field
+        div.trade-card__input-inner
+          input(type='date' name='Дата поставки' value='2024-10-21' placeholder='Укажите дату поставки' autocomplete='off' autocapitalize='off').trade-card__input.trade-card__date
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PURCHASE_PRICE' disabled).trade-card__field
+        div.trade-card__input-inner
+          input(type='number' value='' name='Цена закупки за ед.').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB" selected) руб
+          option(value="EUR") евр
+          option(value="USD") дол
+          option(value="AED") дрх
+          option(value="CNY") юань
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PURCHASE_BASIS').trade-card__field
+        select(name="Базис закупки").trade-card__select
+          option(value="DDP") DDP
+          option(value="DAP") DAP
+          option(value="CIF") CIF
+          option(value="FOB") FOB
+          option(value="FCA") FCA
+
+    td.trade-card__cell
+      fieldset(data-name='UF_TRANSPORT_TYPE').trade-card__field
+        select(name="Вид транспорта").trade-card__select
+          option(value="Мульти") Мульти
+          option(value="Авто") Авто
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PURCHASE_TRANSPORT_RUB').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' value='' name='Расходы на закупку: Транспорт рубли' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB") руб
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PURCHASE_TRANSPORT_VAL').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' value='' name='Расходы на закупку: Транспорт валюта' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB") руб
+          option(value="EUR" selected) евр
+          option(value="USD") дол
+          option(value="AED") дрх
+          option(value="CNY") юань
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PURCHASE_DUTY').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' value='' name='Расходы на закупку: Пошлина + ЕТП' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB") руб
+          option(value="EUR" selected) евр
+          option(value="USD") дол
+          option(value="AED") дрх
+          option(value="CNY") юань
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PURCHASE_INSURANCE').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Расходы на закупку: Страхование' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB") руб
+          option(value="EUR" selected) евр
+          option(value="USD") дол
+          option(value="AED") дрх
+          option(value="CNY") юань
+
+    td.trade-card__cell
+      fieldset(data-name='UF_DECLARATION').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' value='' name='Декларирование' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="RUB") руб
+          option(value="EUR" selected) евр
+          option(value="USD") дол
+          option(value="AED") дрх
+          option(value="CNY") юань
+
+    td.trade-card__cell
+      fieldset(data-name='UF_COST_PER_UNIT' disabled).trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Себестоимость за ед.' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="EUR" selected) евр
+
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PROFIT_RATE_PERCENTAGE').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Норма прибыли (%)' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PRICE_PER_UNIT').trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Цена продажи за ед.' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="EUR" selected) евр
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PRODUCT_PRICE_NO_NDS' disabled).trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Стоимость товара без НДС' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="EUR" selected) евр
+
+    td.trade-card__cell
+      fieldset(data-name='UF_NDS' disabled).trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='НДС' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="EUR" selected) евр
+
+    td.trade-card__cell
+      fieldset(data-name='UF_PRODUCT_PRICE_NDS' disabled).trade-card__field
+        div.trade-card__input-inner
+          input(type='number' name='Стоимость товара с НДС' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+        select(name="CURRENCY").trade-card__select
+          option(value="EUR" selected) евр

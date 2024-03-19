@@ -1,0 +1,29 @@
+div.exchange-rate
+  table.exchange-rate__table
+    tr
+      th(rowspan='2').exchange-rate__cell-head курс (1/руб)
+      th(style="width: 150px;").exchange-rate__cell-head
+        span.exchange-rate__table-title.exchange-rate__table-title--right USD
+      th(style="width: 150px;").exchange-rate__cell-head
+        span.exchange-rate__table-title.exchange-rate__table-title--right EUR
+      th(style="width: 150px;").exchange-rate__cell-head
+        span.exchange-rate__table-title.exchange-rate__table-title--right AED
+      th(style="width: 150px;").exchange-rate__cell-head
+        span.exchange-rate__table-title.exchange-rate__table-title--right CNY
+    tr
+      td.exchange-rate__cell
+        fieldset(data-name='UF_EXCHANGE_USD').exchange-rate__field
+          div.exchange-rate__input-inner
+            input(type='number' data-name='USD' name='USD' value='98.50' placeholder='1.00' autocomplete='off' autocapitalize='off').exchange-rate__input
+      td.exchange-rate__cell
+        fieldset(data-name='UF_EXCHANGE_EUR').exchange-rate__field
+          div.exchange-rate__input-inner
+            input(type='number' data-name='EUR' name='EUR' value='52.11' placeholder='1.00' autocomplete='off' autocapitalize='off').exchange-rate__input
+      td.exchange-rate__cell
+        fieldset(data-name='UF_EXCHANGE_AED').exchange-rate__field
+          div.exchange-rate__input-inner
+            input(type='number' data-name='AED' name='AED' value='50.00' placeholder='1.00' autocomplete='off' autocapitalize='off').exchange-rate__input
+      td.exchange-rate__cell
+        fieldset(data-name='UF_EXCHANGE_CNY').exchange-rate__field
+          div.exchange-rate__input-inner
+            input(type='number' data-name='CNY' name='CNY' value='100.00' placeholder='1.00' autocomplete='off' autocapitalize='off').exchange-rate__input

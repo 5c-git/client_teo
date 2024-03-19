@@ -1,0 +1,1 @@
+import './trade-type.scss';

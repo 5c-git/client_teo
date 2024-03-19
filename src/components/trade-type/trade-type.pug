@@ -1,0 +1,22 @@
+div.trade-type
+  table.trade-type__table
+    tr.trade-type__table-header
+      th(style="width: 200px;").trade-type__cell-head
+        span.trade-type__table-title.trade-type__table-title--right Место реализации
+
+      th(style="width: 200px;").trade-type__cell-head
+        span.trade-type__table-title.trade-type__table-title--right Тип расчета
+
+
+    tr
+      td.trade-card__cell
+        fieldset(data-name='UF_REALIZ_PLACE').trade-card__field
+          select(name="Место реализации").trade-card__select
+            option(value="Россия") Россия
+            option(value="Зарубежье") Зарубежье
+
+      td.trade-card__cell
+        fieldset(data-name='UF_PAY_TYPE').trade-card__field
+          select(name="Тип расчета").trade-card__select
+            option(value="Прямая продажа") Прямая продажа
+            option(value="Тендер") Тендер

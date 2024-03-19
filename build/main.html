@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#231f20"><link rel="apple-touch-icon" sizes="76x76" href="./assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="./assets/favicons/site.webmanifest">
+<link rel="mask-icon" href="./assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="./assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="./assets/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+    <title>issue_65669</title>
+    <link href="../libsJQ/select2.css" rel="stylesheet" type="text/css">
+  <link href="css/vendors.css" rel="stylesheet"><link href="css/bundle.css" rel="stylesheet"></head>
+  <body>
+<header class="header"></header>
+    <main>
+          <div class="layout">
+            <div class="container">
+<button class="addTradeOne" type="button">Добавить готовые товары</button>
+<button class="addTradeTwo" type="button">Добавить новый товар</button>
+<button class="removeTradeOne" type="button">Удалить первый товар</button>
+<section class="trade">
+<template id="trade-card">
+  <tr class="trade-card">
+    <td class="trade-card__cell"><span class="trade-card__number"></span></td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_POS_NAME">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="text" name="Название товара" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_UNIT">
+        <select class="trade-card__select" name="Ед. измерения">
+          <option value="часы">часы</option>
+          <option value="месяц">месяц</option>
+          <option value="квартал">квартал</option>
+          <option value="шт" selected>шт</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PRICE">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" value="" name="Цена за ед.">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB" selected>руб</option>
+          <option value="EUR">евр</option>
+          <option value="USD">дол</option>
+          <option value="AED">дрх</option>
+          <option value="CNY">юань</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_QUANTITY">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Количество" value="1" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_MANUFACTURER">
+        <select class="trade-card__select" name="Производитель">
+          <option value="1" selected>Россия</option>
+          <option value="2">Беларусь</option>
+          <option value="3">Китай</option>
+          <option value="4">Казахстан</option>
+          <option value="5">Турция</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PROVIDER">
+        <select class="trade-card__select" name="Поставщик">
+          <option value="1" selected>Россия</option>
+          <option value="2">Беларусь</option>
+          <option value="3">Китай</option>
+          <option value="4">Казахстан</option>
+          <option value="5">Турция</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_DELIVERY_DATE">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input trade-card__date" type="date" name="Дата поставки" value="2024-10-21" placeholder="Укажите дату поставки" autocomplete="off" autocapitalize="off">
+        </div>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PURCHASE_PRICE" disabled>
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" value="" name="Цена закупки за ед.">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB" selected>руб</option>
+          <option value="EUR">евр</option>
+          <option value="USD">дол</option>
+          <option value="AED">дрх</option>
+          <option value="CNY">юань</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PURCHASE_BASIS">
+        <select class="trade-card__select" name="Базис закупки">
+          <option value="DDP">DDP</option>
+          <option value="DAP">DAP</option>
+          <option value="CIF">CIF</option>
+          <option value="FOB">FOB</option>
+          <option value="FCA">FCA</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_TRANSPORT_TYPE">
+        <select class="trade-card__select" name="Вид транспорта">
+          <option value="Мульти">Мульти</option>
+          <option value="Авто">Авто</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PURCHASE_TRANSPORT_RUB">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" value="" name="Расходы на закупку: Транспорт рубли" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB">руб</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PURCHASE_TRANSPORT_VAL">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" value="" name="Расходы на закупку: Транспорт валюта" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB">руб</option>
+          <option value="EUR" selected>евр</option>
+          <option value="USD">дол</option>
+          <option value="AED">дрх</option>
+          <option value="CNY">юань</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PURCHASE_DUTY">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" value="" name="Расходы на закупку: Пошлина + ЕТП" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB">руб</option>
+          <option value="EUR" selected>евр</option>
+          <option value="USD">дол</option>
+          <option value="AED">дрх</option>
+          <option value="CNY">юань</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PURCHASE_INSURANCE">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Расходы на закупку: Страхование" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB">руб</option>
+          <option value="EUR" selected>евр</option>
+          <option value="USD">дол</option>
+          <option value="AED">дрх</option>
+          <option value="CNY">юань</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_DECLARATION">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" value="" name="Декларирование" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="RUB">руб</option>
+          <option value="EUR" selected>евр</option>
+          <option value="USD">дол</option>
+          <option value="AED">дрх</option>
+          <option value="CNY">юань</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_COST_PER_UNIT" disabled>
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Себестоимость за ед." placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="EUR" selected>евр</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PROFIT_RATE_PERCENTAGE">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Норма прибыли (%)" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PRICE_PER_UNIT">
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Цена продажи за ед." placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="EUR" selected>евр</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PRODUCT_PRICE_NO_NDS" disabled>
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Стоимость товара без НДС" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="EUR" selected>евр</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_NDS" disabled>
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="НДС" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="EUR" selected>евр</option>
+        </select>
+      </fieldset>
+    </td>
+    <td class="trade-card__cell">
+      <fieldset class="trade-card__field" data-name="UF_PRODUCT_PRICE_NDS" disabled>
+        <div class="trade-card__input-inner">
+          <input class="trade-card__input" type="number" name="Стоимость товара с НДС" placeholder="" autocomplete="off" autocapitalize="off">
+        </div>
+        <select class="trade-card__select" name="CURRENCY">
+          <option value="EUR" selected>евр</option>
+        </select>
+      </fieldset>
+    </td>
+  </tr>
+</template>
+  <form class="trade__form">
+    <div class="trade__header">
+      <div class="trade__exchange-rate">
+<div class="exchange-rate">
+  <table class="exchange-rate__table">
+    <tr>
+      <th class="exchange-rate__cell-head" rowspan="2">курс (1/руб)</th>
+      <th class="exchange-rate__cell-head" style="width: 150px;"><span class="exchange-rate__table-title exchange-rate__table-title--right">USD</span></th>
+      <th class="exchange-rate__cell-head" style="width: 150px;"><span class="exchange-rate__table-title exchange-rate__table-title--right">EUR</span></th>
+      <th class="exchange-rate__cell-head" style="width: 150px;"><span class="exchange-rate__table-title exchange-rate__table-title--right">AED</span></th>
+      <th class="exchange-rate__cell-head" style="width: 150px;"><span class="exchange-rate__table-title exchange-rate__table-title--right">CNY</span></th>
+    </tr>
+    <tr>
+      <td class="exchange-rate__cell">
+        <fieldset class="exchange-rate__field" data-name="UF_EXCHANGE_USD">
+          <div class="exchange-rate__input-inner">
+            <input class="exchange-rate__input" type="number" data-name="USD" name="USD" value="98.50" placeholder="1.00" autocomplete="off" autocapitalize="off">
+          </div>
+        </fieldset>
+      </td>
+      <td class="exchange-rate__cell">
+        <fieldset class="exchange-rate__field" data-name="UF_EXCHANGE_EUR">
+          <div class="exchange-rate__input-inner">
+            <input class="exchange-rate__input" type="number" data-name="EUR" name="EUR" value="52.11" placeholder="1.00" autocomplete="off" autocapitalize="off">
+          </div>
+        </fieldset>
+      </td>
+      <td class="exchange-rate__cell">
+        <fieldset class="exchange-rate__field" data-name="UF_EXCHANGE_AED">
+          <div class="exchange-rate__input-inner">
+            <input class="exchange-rate__input" type="number" data-name="AED" name="AED" value="50.00" placeholder="1.00" autocomplete="off" autocapitalize="off">
+          </div>
+        </fieldset>
+      </td>
+      <td class="exchange-rate__cell">
+        <fieldset class="exchange-rate__field" data-name="UF_EXCHANGE_CNY">
+          <div class="exchange-rate__input-inner">
+            <input class="exchange-rate__input" type="number" data-name="CNY" name="CNY" value="100.00" placeholder="1.00" autocomplete="off" autocapitalize="off">
+          </div>
+        </fieldset>
+      </td>
+    </tr>
+  </table>
+</div>
+      </div>
+      <div class="trade__type">
+<div class="trade-type">
+  <table class="trade-type__table">
+    <tr class="trade-type__table-header">
+      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title trade-type__table-title--right">Место реализации</span></th>
+      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title trade-type__table-title--right">Тип расчета</span></th>
+    </tr>
+    <tr>
+      <td class="trade-card__cell">
+        <fieldset class="trade-card__field" data-name="UF_REALIZ_PLACE">
+          <select class="trade-card__select" name="Место реализации">
+            <option value="Россия">Россия</option>
+            <option value="Зарубежье">Зарубежье</option>
+          </select>
+        </fieldset>
+      </td>
+      <td class="trade-card__cell">
+        <fieldset class="trade-card__field" data-name="UF_PAY_TYPE">
+          <select class="trade-card__select" name="Тип расчета">
+            <option value="Прямая продажа">Прямая продажа</option>
+            <option value="Тендер">Тендер</option>
+          </select>
+        </fieldset>
+      </td>
+    </tr>
+  </table>
+</div>
+      </div>
+    </div>
+    <div class="trade__form-wrapper">
+      <table class="trade__table">
+        <tr class="trade__table-header">
+          <th class="trade__cell-head" style="width: 50px;" rowspan="2"><span class="trade__table-title trade__table-title--right">№ </span></th>
+          <th class="trade__cell-head" style="width: 350px;" rowspan="2"><span class="trade__table-title">Наименование позиции</span></th>
+          <th class="trade__cell-head" style="width: 200px;" rowspan="2"><span class="trade__table-title trade__table-title--right">Ед. измерения</span></th>
+          <th class="trade__cell-head" style="width: 200px;" rowspan="2"><span class="trade__table-title trade__table-title--right">Цена за единицу</span></th>
+          <th class="trade__cell-head" style="width: 2600px;" colspan="13"><span class="trade__table-title">Закупка</span></th>
+          <th class="trade__cell-head" style="width: 1000px;" colspan="5"><span class="trade__table-title">Продажа</span></th>
+        </tr>
+        <tr class="trade__table-header">
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Количество</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Производитель</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Поставщик</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Дата поставки</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Цена закупки за ед.</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Базис закупки</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Вид транспорта</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Расходы на закупку: Транспорт рубли</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Расходы на закупку: Транспорт валюта</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Расходы на закупку: Пошлина + ЕТП</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Расходы на закупку: Страхование</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Декларирование</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Себестоимость за ед.</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Норма прибыли (%)</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Цена продажи за ед.</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Стоимость товара без НДС</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">НДС</span></th>
+          <th class="trade__cell-head" style="width: 200px;"><span class="trade__table-title trade__table-title--right">Стоимость товара с НДС</span></th>
+        </tr>
+      </table>
+    </div>
+  </form>
+  <div class="trade__total">
+<div class="total">
+  <div class="total__wrapper">
+    <table class="total__table">
+      <tr class="total__row">
+        <th class="total__cell total__cell--title" colspan="2">Закупка</th>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Цена закупки: Сумма цены закупки за ед.:</th>
+        <td class="total__cell total__cell--price" data-name="UF_PURCHASE_PRICE_SUM"><span class="total__value">0.00</span> евр</td>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Транспортные расходы:  Сумма транспортных расходов:</th>
+        <td class="total__cell total__cell--price" data-name=""><span class="total__value">0.00</span> евр</td>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Расходы на пошлину: Сумма расходов на пошлину:</th>
+        <td class="total__cell total__cell--price" data-name="UF_PURCHASE_DUTY_SUM"><span class="total__value">0.00</span> евр</td>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Расходы на страхование: Сумма расходов на страхование:	</th>
+        <td class="total__cell total__cell--price" data-name="UF_PURCHASE_INSURANCE_SUM"><span class="total__value">0.00</span> евр</td>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Себестоимость закупки: Сумма себестоимости за ед.:	</th>
+        <td class="total__cell total__cell--price" data-name="UF_COST_PER_UNIT_SUM"><span class="total__value">0.00</span> евр</td>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell total__cell--title" colspan="2">Продажа</th>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Стоимость товара без НДС: Сумма Стоимость товара без НДС:</th>
+        <td class="total__cell total__cell--price" data-name="UF_PRODUCT_PRICE_NO_NDS_SUM"><span class="total__value">0.00</span> евр</td>
+      </tr>
+      <tr class="total__row">
+        <th class="total__cell">Норма прибыли:  (Стоимость товара без НДС / Себестоимость закупки - 1) * 100:	</th>
+        <td class="total__cell total__cell--price" data-name="PROFIT_RATE"><span class="total__value">0.00</span> %</td>
+      </tr>
+    </table>
+  </div>
+</div>
+  </div>
+</section>
+            </div>
+          </div>
+    </main>
+<footer class="footer"></footer>
+    <script src="libsJQ/jquery.min.js"></script>
+    <script src="libsJQ/select2.js"></script>
+    <script src="libsJQ/mocks.js"></script>
+  <script src="js/urlapp.js"></script><script src="js/vendors.js"></script><script src="js/bundle.js"></script><script src="js/common.js"></script></body>
+</html>
