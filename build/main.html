@@ -27,11 +27,22 @@
 <section class="trade">
 <template id="trade-card">
   <tr class="trade-card">
+    <td class="trade-card__cell">
+      <div class="trade-card__action">
+<div class="trade-action">
+  <button class="trade-action__button" type="button"><span></span></button>
+  <ul class="trade-action__list">
+    <li class="trade-action__item trade-action__delete"><span>Удалить</span></li>
+    <li class="trade-action__item"><span>Ещё кнопка</span></li>
+  </ul>
+</div>
+      </div>
+    </td>
     <td class="trade-card__cell"><span class="trade-card__number"></span></td>
     <td class="trade-card__cell">
       <fieldset class="trade-card__field" data-name="UF_POS_NAME">
         <div class="trade-card__input-inner">
-          <input class="trade-card__input" type="text" name="Название товара" placeholder="" autocomplete="off" autocapitalize="off">
+          <input class="trade-card__input trade-card__input--left" type="text" name="Название товара" placeholder="" autocomplete="off" autocapitalize="off">
         </div>
       </fieldset>
     </td>
@@ -330,6 +341,7 @@
     <div class="trade__form-wrapper">
       <table class="trade__table">
         <tr class="trade__table-header">
+          <th class="trade__cell-head" style="width: 50px;" rowspan="2"><span></span></th>
           <th class="trade__cell-head" style="width: 50px;" rowspan="2"><span class="trade__table-title trade__table-title--right">№ </span></th>
           <th class="trade__cell-head" style="width: 350px;" rowspan="2"><span class="trade__table-title">Наименование позиции</span></th>
           <th class="trade__cell-head" style="width: 200px;" rowspan="2"><span class="trade__table-title trade__table-title--right">Ед. измерения</span></th>
@@ -368,34 +380,34 @@
         <th class="total__cell total__cell--title" colspan="2">Закупка</th>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Цена закупки: Сумма цены закупки за ед.:</th>
+        <th class="total__cell">Цена закупки:</th>
         <td class="total__cell total__cell--price" data-name="UF_PURCHASE_PRICE_SUM"><span class="total__value">0.00</span> евр</td>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Транспортные расходы:  Сумма транспортных расходов:</th>
-        <td class="total__cell total__cell--price" data-name=""><span class="total__value">0.00</span> евр</td>
+        <th class="total__cell">Транспортные расходы:</th>
+        <td class="total__cell total__cell--price" data-name="UF_PURCHASE_TRANSPORT_SUM"><span class="total__value">0.00</span> евр</td>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Расходы на пошлину: Сумма расходов на пошлину:</th>
+        <th class="total__cell">Расходы на пошлину:</th>
         <td class="total__cell total__cell--price" data-name="UF_PURCHASE_DUTY_SUM"><span class="total__value">0.00</span> евр</td>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Расходы на страхование: Сумма расходов на страхование:	</th>
+        <th class="total__cell">Расходы на страхование:</th>
         <td class="total__cell total__cell--price" data-name="UF_PURCHASE_INSURANCE_SUM"><span class="total__value">0.00</span> евр</td>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Себестоимость закупки: Сумма себестоимости за ед.:	</th>
+        <th class="total__cell">Себестоимость закупки:</th>
         <td class="total__cell total__cell--price" data-name="UF_COST_PER_UNIT_SUM"><span class="total__value">0.00</span> евр</td>
       </tr>
       <tr class="total__row">
         <th class="total__cell total__cell--title" colspan="2">Продажа</th>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Стоимость товара без НДС: Сумма Стоимость товара без НДС:</th>
+        <th class="total__cell">Стоимость товара без НДС:</th>
         <td class="total__cell total__cell--price" data-name="UF_PRODUCT_PRICE_NO_NDS_SUM"><span class="total__value">0.00</span> евр</td>
       </tr>
       <tr class="total__row">
-        <th class="total__cell">Норма прибыли:  (Стоимость товара без НДС / Себестоимость закупки - 1) * 100:	</th>
+        <th class="total__cell">Норма прибыли:</th>
         <td class="total__cell total__cell--price" data-name="PROFIT_RATE"><span class="total__value">0.00</span> %</td>
       </tr>
     </table>

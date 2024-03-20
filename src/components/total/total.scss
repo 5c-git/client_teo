@@ -18,13 +18,13 @@
   }
 
   &__cell {
-    width: 300px;
+    min-width: 300px;
     padding-bottom: 10px;
     text-align: right;
     font: inherit;
 
     &--price {
-      width: 200px;
+      min-width: 200px;
       color: var(--crm-product-list-light-color);
     }
 

@@ -1,12 +1,16 @@
 template#trade-card
   tr.trade-card
     td.trade-card__cell
+      div.trade-card__action
+        include ../trade-action/trade-action
+
+    td.trade-card__cell
       span.trade-card__number
 
     td.trade-card__cell
       fieldset(data-name='UF_POS_NAME').trade-card__field
         div.trade-card__input-inner
-          input(type='text' name='Название товара' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
+          input(type='text' name='Название товара' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input.trade-card__input--left
 
     td.trade-card__cell
       fieldset(data-name='UF_UNIT').trade-card__field

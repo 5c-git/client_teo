@@ -8,7 +8,6 @@
 
   &__header {
     display: flex;
-    border-bottom: 1px $line-color solid;
     gap: 30px;
   }
 
@@ -44,11 +43,6 @@
   &__table-title {
     display: inline-block;
     width: 100%;
-    padding-right: 15px;
-    text-align: left;
-
-    &--right {
-      text-align: right;
-    }
+    text-align: center;
   }
 }

@@ -1,9 +1,16 @@
 // Куки уже вшиты в bundle.js
 
+// Функция чтобы округлять до сотых.
 const rounded = (number) => {
   const multiple = Math.pow(10, 2);
   return Math.round(+number * multiple) / multiple;
 }
+
+// Функция чтобы ставить пробелы каждые 3 символа.
+const numberSplitter = (num) => {
+  const n = num.toString();
+  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
+};
 
 const updateFormValue = () => {
   const trade = document.querySelector('.trade');
@@ -14,6 +21,11 @@ const updateFormValue = () => {
       RUB: 1.00,
     };
     const UF_PURCHASE_PRICE_SUM = {
+      VALUE: 0,
+      CURRENCY: 'EUR',
+      RUB: 0,
+    };
+    const UF_PURCHASE_TRANSPORT_SUM = {
       VALUE: 0,
       CURRENCY: 'EUR',
       RUB: 0,
@@ -127,6 +139,14 @@ const updateFormValue = () => {
           UF_PURCHASE_INSURANCE_SUM.RUB += UF_PURCHASE_INSURANCE.RUB;
         }
 
+        if (fieldName == 'UF_PURCHASE_TRANSPORT_RUB') {
+          UF_PURCHASE_TRANSPORT_SUM.RUB += UF_PURCHASE_TRANSPORT_RUB.RUB;
+        }
+
+        if (fieldName == 'UF_PURCHASE_TRANSPORT_VAL') {
+          UF_PURCHASE_TRANSPORT_SUM.RUB += UF_PURCHASE_TRANSPORT_VAL.RUB;
+        }
+
         if (fieldName == 'UF_PURCHASE_PRICE') {
           UF_PURCHASE_PRICE.VALUE = UF_PRICE.VALUE * UF_QUANTITY;
           field.querySelector('input').value = UF_PURCHASE_PRICE.VALUE;
@@ -198,31 +218,37 @@ const updateFormValue = () => {
 
       if (fieldName == 'UF_PURCHASE_PRICE_SUM') {
         UF_PURCHASE_PRICE_SUM.VALUE = exchange(UF_PURCHASE_PRICE_SUM.RUB, UF_PURCHASE_PRICE_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = UF_PURCHASE_PRICE_SUM.VALUE;
+        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_PRICE_SUM.VALUE);
+      }
+
+      if (fieldName == 'UF_PURCHASE_TRANSPORT_SUM') {
+        console.log(UF_PURCHASE_TRANSPORT_SUM);
+        UF_PURCHASE_TRANSPORT_SUM.VALUE = exchange(UF_PURCHASE_TRANSPORT_SUM.RUB, UF_PURCHASE_TRANSPORT_SUM.CURRENCY);
+        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_TRANSPORT_SUM.VALUE);
       }
 
       if (fieldName == 'UF_PURCHASE_DUTY_SUM') {
         UF_PURCHASE_DUTY_SUM.VALUE = exchange(UF_PURCHASE_DUTY_SUM.RUB, UF_PURCHASE_DUTY_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = UF_PURCHASE_DUTY_SUM.VALUE;
+        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_DUTY_SUM.VALUE);
       }
 
       if (fieldName == 'UF_PURCHASE_INSURANCE_SUM') {
         UF_PURCHASE_INSURANCE_SUM.VALUE = exchange(UF_PURCHASE_INSURANCE_SUM.RUB, UF_PURCHASE_INSURANCE_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = UF_PURCHASE_INSURANCE_SUM.VALUE;
+        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_INSURANCE_SUM.VALUE);
       }
 
       if (fieldName == 'UF_COST_PER_UNIT_SUM') {
         UF_COST_PER_UNIT_SUM.VALUE = exchange(UF_COST_PER_UNIT_SUM.RUB, UF_COST_PER_UNIT_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = UF_COST_PER_UNIT_SUM.VALUE;
+        field.querySelector('.total__value').textContent = numberSplitter(UF_COST_PER_UNIT_SUM.VALUE);
       }
 
       if (fieldName == 'UF_PRODUCT_PRICE_NO_NDS_SUM') {
-        field.querySelector('.total__value').textContent = UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE;
+        field.querySelector('.total__value').textContent = numberSplitter(UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE);
       }
 
       if (fieldName == 'PROFIT_RATE') {
-        const value = (UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE / UF_COST_PER_UNIT_SUM.VALUE - 1) * 100;
-        field.querySelector('.total__value').textContent = value;
+        const value = rounded((UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE / UF_COST_PER_UNIT_SUM.VALUE - 1) * 100);
+        field.querySelector('.total__value').textContent = numberSplitter(value);
       }
     });
   }
@@ -280,44 +306,57 @@ if (trade) {
     } = data;
 
     const templateContent = trade.querySelector('#trade-card').content.cloneNode(true);
-    templateContent.querySelector('.trade-card__number').textContent = ID;
+    const tradeCard = templateContent.querySelector('.trade-card');
+    tradeCard.querySelector('.trade-card__number').textContent = ID;
 
-    templateContent.querySelector('[data-name="UF_DECLARATION"]').querySelector('select').value = UF_DECLARATION.CURRENCY;
-    templateContent.querySelector('[data-name="UF_DECLARATION"]').querySelector('input').value = UF_DECLARATION.VALUE;
+    tradeCard.querySelector('[data-name="UF_DECLARATION"]').querySelector('select').value = UF_DECLARATION.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_DECLARATION"]').querySelector('input').value = UF_DECLARATION.VALUE;
 
-    templateContent.querySelector('[data-name="UF_DELIVERY_DATE"]').querySelector('input').value = UF_DELIVERY_DATE;
+    tradeCard.querySelector('[data-name="UF_DELIVERY_DATE"]').querySelector('input').value = UF_DELIVERY_DATE;
 
-    templateContent.querySelector('[data-name="UF_MANUFACTURER"]').querySelector('select').value = UF_MANUFACTURER;
+    tradeCard.querySelector('[data-name="UF_MANUFACTURER"]').querySelector('select').value = UF_MANUFACTURER;
 
-    templateContent.querySelector('[data-name="UF_POS_NAME"]').querySelector('input').value = UF_POS_NAME;
+    tradeCard.querySelector('[data-name="UF_POS_NAME"]').querySelector('input').value = UF_POS_NAME;
 
-    templateContent.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
-    templateContent.querySelector('[data-name="UF_PRICE"]').querySelector('input').value = UF_PRICE.VALUE;
+    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('input').value = UF_PRICE.VALUE;
 
-    templateContent.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
-    templateContent.querySelector('[data-name="UF_PRICE"]').querySelector('input').value = UF_PRICE.VALUE;
+    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('input').value = UF_PRICE.VALUE;
 
-    templateContent.querySelector('[data-name="UF_PROVIDER"]').querySelector('select').value = UF_PROVIDER;
+    tradeCard.querySelector('[data-name="UF_PROVIDER"]').querySelector('select').value = UF_PROVIDER;
 
-    templateContent.querySelector('[data-name="UF_PURCHASE_BASIS"]').querySelector('select').value = UF_PURCHASE_BASIS;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_BASIS"]').querySelector('select').value = UF_PURCHASE_BASIS;
 
-    templateContent.querySelector('[data-name="UF_PURCHASE_DUTY"]').querySelector('select').value = UF_PURCHASE_DUTY.CURRENCY;
-    templateContent.querySelector('[data-name="UF_PURCHASE_DUTY"]').querySelector('input').value = UF_PURCHASE_DUTY.VALUE;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_DUTY"]').querySelector('select').value = UF_PURCHASE_DUTY.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_DUTY"]').querySelector('input').value = UF_PURCHASE_DUTY.VALUE;
 
-    templateContent.querySelector('[data-name="UF_PURCHASE_INSURANCE"]').querySelector('select').value = UF_PURCHASE_INSURANCE.CURRENCY;
-    templateContent.querySelector('[data-name="UF_PURCHASE_INSURANCE"]').querySelector('input').value = UF_PURCHASE_INSURANCE.VALUE;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_INSURANCE"]').querySelector('select').value = UF_PURCHASE_INSURANCE.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_INSURANCE"]').querySelector('input').value = UF_PURCHASE_INSURANCE.VALUE;
 
-    templateContent.querySelector('[data-name="UF_PURCHASE_TRANSPORT_RUB"]').querySelector('select').value = UF_PURCHASE_TRANSPORT_RUB.CURRENCY;
-    templateContent.querySelector('[data-name="UF_PURCHASE_TRANSPORT_RUB"]').querySelector('input').value = UF_PURCHASE_TRANSPORT_RUB.VALUE;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_TRANSPORT_RUB"]').querySelector('select').value = UF_PURCHASE_TRANSPORT_RUB.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_TRANSPORT_RUB"]').querySelector('input').value = UF_PURCHASE_TRANSPORT_RUB.VALUE;
 
-    templateContent.querySelector('[data-name="UF_PURCHASE_TRANSPORT_VAL"]').querySelector('select').value = UF_PURCHASE_TRANSPORT_VAL.CURRENCY;
-    templateContent.querySelector('[data-name="UF_PURCHASE_TRANSPORT_VAL"]').querySelector('input').value = UF_PURCHASE_TRANSPORT_VAL.VALUE;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_TRANSPORT_VAL"]').querySelector('select').value = UF_PURCHASE_TRANSPORT_VAL.CURRENCY;
+    tradeCard.querySelector('[data-name="UF_PURCHASE_TRANSPORT_VAL"]').querySelector('input').value = UF_PURCHASE_TRANSPORT_VAL.VALUE;
 
-    templateContent.querySelector('[data-name="UF_QUANTITY"]').querySelector('input').value = UF_QUANTITY;
+    tradeCard.querySelector('[data-name="UF_QUANTITY"]').querySelector('input').value = UF_QUANTITY;
 
-    templateContent.querySelector('[data-name="UF_TRANSPORT_TYPE"]').querySelector('select').value = UF_TRANSPORT_TYPE;
+    tradeCard.querySelector('[data-name="UF_TRANSPORT_TYPE"]').querySelector('select').value = UF_TRANSPORT_TYPE;
 
-    templateContent.querySelector('[data-name="UF_UNIT"]').querySelector('select').value = UF_UNIT;
+    tradeCard.querySelector('[data-name="UF_UNIT"]').querySelector('select').value = UF_UNIT;
+
+
+    const tradeAction = tradeCard.querySelector('.trade-action');
+    if (tradeAction) {
+      const deleteButton = tradeCard.querySelector('.trade-action__delete');
+      if (deleteButton) {
+        deleteButton.addEventListener('click', () => {
+          tradeCard.remove();
+          updateFormValue();
+        });
+      }
+    }
 
     trade.querySelector('.trade__table').appendChild(templateContent);
 

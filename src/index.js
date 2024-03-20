@@ -39,3 +39,4 @@ import './components/trade-card/trade-card';
 import './components/total/total';
 import './components/select2/select2';
 import './components/flatpickr-calendar/flatpickr-calendar';
+import './components/trade-action/trade-action';

@@ -169,13 +169,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_footer_footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18);
 /* harmony import */ var _components_layout_layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(21);
 /* harmony import */ var _components_window_window__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(24);
-/* harmony import */ var _components_trade_trade__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(38);
-/* harmony import */ var _components_exchange_rate_exchange_rate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(41);
-/* harmony import */ var _components_trade_type_trade_type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(44);
+/* harmony import */ var _components_trade_trade__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(41);
+/* harmony import */ var _components_exchange_rate_exchange_rate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(44);
+/* harmony import */ var _components_trade_type_trade_type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(47);
 /* harmony import */ var _components_trade_card_trade_card__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(25);
-/* harmony import */ var _components_total_total__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(47);
-/* harmony import */ var _components_select2_select2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(50);
-/* harmony import */ var _components_flatpickr_calendar_flatpickr_calendar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(53);
+/* harmony import */ var _components_total_total__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(50);
+/* harmony import */ var _components_select2_select2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(53);
+/* harmony import */ var _components_flatpickr_calendar_flatpickr_calendar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(56);
+/* harmony import */ var _components_trade_action_trade_action__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(38);
 // SvgSprite compiler
 function requireAll(r) {
   r.keys().forEach(r);
@@ -215,6 +216,7 @@ window.addEventListener("resize", () => {
 
 
 
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
@@ -235,15 +237,8 @@ webpackEmptyContext.id = 2;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPaddingOnBody", function() { return getPaddingOnBody; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPaddingFromBody", function() { return getPaddingFromBody; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getScrollbarWidth", function() { return getScrollbarWidth; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "phoneRegExp", function() { return phoneRegExp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activateRequestButtons", function() { return activateRequestButtons; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activateRatingButtons", function() { return activateRatingButtons; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shuffle", function() { return shuffle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFormData", function() { return createFormData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "numberSplitter", function() { return numberSplitter; });
 /* harmony import */ var _utils_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
 /* harmony import */ var _utils_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
@@ -255,114 +250,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* eslint-enable */
-// const phoneRegExp = /^((8|\+7)[ \- ]?)?(\(?\d{3}\)?[ \- ]?)?[\d\- ]{7,10}$/;
-
-const phoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){11,14}(\s*)?$/;
-const formatDate = value => {
-  const pattern = /(\d{1,2})\.(\d{1,2})\.(\d{1,4})/;
-  return value.replace(pattern, "$2/$1/$3");
-}; // Находим ширину скролбара и узнаем на сколько добавлять отступ справа у body.
-
-const body = document.querySelector("body");
-const header = document.querySelector(".header__fixed");
-const dropdown = document.querySelector(".header__dropdown");
-
-const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
-
-let checker = false; // Функция чтобы блочить экран и давать отступ.
-
-const getPaddingOnBody = () => {
-  const modal = document.querySelector(".Modal");
-  document.addEventListener("resize", () => {
-    getScrollbarWidth();
-  });
-
-  if (!checker) {
-    body.style.paddingRight = `${getScrollbarWidth()}px`;
-
-    if (header) {
-      header.style.paddingRight = `${getScrollbarWidth()}px`;
-    }
-
-    if (dropdown) {
-      dropdown.style.paddingRight = `${getScrollbarWidth()}px`;
-    }
-
-    if (modal) {
-      modal.style.paddingRight = `${getScrollbarWidth()}px`;
-    }
-
-    body.classList.add("static");
-    checker = true;
-  }
-}; // Функция чтобы снимать блокировку экрана и убирать отступ.
-
-
-const getPaddingFromBody = () => {
-  const modal = document.querySelector(".Modal");
-
-  if (checker) {
-    body.style.paddingRight = "";
-    body.style.paddingRight = `${getScrollbarWidth()}px`;
-
-    if (header) {
-      header.style.paddingRight = "";
-    }
-
-    if (dropdown) {
-      dropdown.style.paddingRight = "";
-    }
-
-    if (modal) {
-      modal.style.paddingRight = "";
-    }
-
-    body.classList.remove("static");
-    checker = false;
-  }
-}; // Функция чтобы навешивать вызов модального окна заявки по кнопке.
-
-
-const activateRequestButtons = () => {
-  const buttons = document.querySelectorAll(".button-request:not(.button-request--js)");
-  buttons.forEach(button => {
-    if (!button.classList.contains("button-request--js")) {
-      button.classList.add("button-request--js");
-      const {
-        type
-      } = button.dataset;
-      const {
-        id
-      } = button.dataset;
-      button.addEventListener("click", () => {
-        window.RequestModalProvider.setType(type);
-        window.RequestModalProvider.setId(id);
-        window.RequestModalProvider.setShow(true);
-      });
-    }
-  });
-}; // Функция чтобы навешивать вызов модального окна рейтинга по кнопке.
-
-
-const activateRatingButtons = () => {
-  const buttons = document.querySelectorAll(".button-rating:not(.button-rating--js)");
-  buttons.forEach(button => {
-    if (!button.classList.contains("button-rating--js")) {
-      button.classList.add("button-rating--js");
-      const {
-        type
-      } = button.dataset;
-      const {
-        id
-      } = button.dataset;
-      button.addEventListener("click", () => {
-        window.RatingModalProvider.setType(type);
-        window.RatingModalProvider.setId(id);
-        window.RatingModalProvider.setShow(true);
-      });
-    }
-  });
-};
 
 const shuffle = array => {
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -370,27 +257,12 @@ const shuffle = array => {
 
     [array[i], array[j]] = [array[j], array[i]];
   }
-};
+}; // Функция чтобы ставить пробелы каждые 3 символа.
 
-const isObject = object => {
-  const type = typeof object;
-  return type === "function" || type === "object";
-};
 
-const createFormData = values => {
-  const data = new FormData(); // eslint-disable-next-line no-restricted-syntax
-
-  for (const key in values) {
-    if (isObject(values[key])) {
-      values[key].forEach((file, index) => {
-        data.append(`${key}-${index}`, file);
-      });
-    } else {
-      data.append(key, values[key]);
-    }
-  }
-
-  return data;
+const numberSplitter = num => {
+  const n = num.toString();
+  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
 };
 
 
@@ -617,10 +489,17 @@ module.exports = content.locals || {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _trade_card_trade_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
+/* harmony import */ var _trade_action_trade_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38);
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+
+
 
 window.Corners5ProjectLayout = {
   initSelect: _trade_card_trade_card__WEBPACK_IMPORTED_MODULE_0__["initSelect"],
-  initDeliveryDate: _trade_card_trade_card__WEBPACK_IMPORTED_MODULE_0__["initDeliveryDate"]
+  initDeliveryDate: _trade_card_trade_card__WEBPACK_IMPORTED_MODULE_0__["initDeliveryDate"],
+  shuffle: _utils_utils__WEBPACK_IMPORTED_MODULE_2__["shuffle"],
+  numberSplitter: _utils_utils__WEBPACK_IMPORTED_MODULE_2__["numberSplitter"],
+  tradeActionInit: _trade_action_trade_action__WEBPACK_IMPORTED_MODULE_1__["default"]
 };
 
 /***/ }),
@@ -738,9 +617,36 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _trade_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
-/* harmony import */ var _trade_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_trade_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _trade_action_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+/* harmony import */ var _trade_action_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_trade_action_scss__WEBPACK_IMPORTED_MODULE_0__);
 
+
+const tradeActionInit = () => {
+  let isOpen = false;
+
+  const closeAll = () => {
+    document.querySelectorAll('.trade-action--active').forEach(el => {
+      el.classList.remove('trade-action--active');
+      isOpen = false;
+    });
+  };
+
+  const onDocumentClick = evt => {
+    if (isOpen) {
+      closeAll();
+    }
+
+    if (evt.target.classList.contains('trade-action__button') && !evt.target.parentElement.classList.contains('trade-action--active')) {
+      evt.target.parentElement.classList.add('trade-action--active');
+      isOpen = true;
+    }
+  };
+
+  document.addEventListener('click', onDocumentClick);
+};
+
+tradeActionInit();
+/* harmony default export */ __webpack_exports__["default"] = (tradeActionInit);
 
 /***/ }),
 /* 39 */
@@ -778,8 +684,8 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _exchange_rate_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
-/* harmony import */ var _exchange_rate_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_exchange_rate_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _trade_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
+/* harmony import */ var _trade_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_trade_scss__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ }),
@@ -818,8 +724,8 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _trade_type_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
-/* harmony import */ var _trade_type_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_trade_type_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _exchange_rate_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
+/* harmony import */ var _exchange_rate_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_exchange_rate_scss__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ }),
@@ -858,8 +764,8 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _total_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48);
-/* harmony import */ var _total_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_total_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _trade_type_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48);
+/* harmony import */ var _trade_type_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_trade_type_scss__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ }),
@@ -898,8 +804,8 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _select2_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
-/* harmony import */ var _select2_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_select2_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _total_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
+/* harmony import */ var _total_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_total_scss__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ }),
@@ -938,8 +844,8 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _flatpickr_calendar_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54);
-/* harmony import */ var _flatpickr_calendar_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_flatpickr_calendar_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _select2_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54);
+/* harmony import */ var _select2_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_select2_scss__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ }),
@@ -968,6 +874,46 @@ module.exports = content.locals || {};
 
 /***/ }),
 /* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _flatpickr_calendar_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
+/* harmony import */ var _flatpickr_calendar_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_flatpickr_calendar_scss__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(5);
+            var content = __webpack_require__(58);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
