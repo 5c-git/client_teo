@@ -2,10 +2,13 @@ div.trade-type
   table.trade-type__table
     tr.trade-type__table-header
       th(style="width: 200px;").trade-type__cell-head
-        span.trade-type__table-title.trade-type__table-title--right Место реализации
+        span.trade-type__table-title Место реализации
 
       th(style="width: 200px;").trade-type__cell-head
-        span.trade-type__table-title.trade-type__table-title--right Тип расчета
+        span.trade-type__table-title Тип расчета
+
+      th(style="width: 200px;").trade-type__cell-head
+        span.trade-type__table-title Выбор основной валюты
 
 
     tr
@@ -20,3 +23,12 @@ div.trade-type
           select(name="Тип расчета").trade-card__select
             option(value="Прямая продажа") Прямая продажа
             option(value="Тендер") Тендер
+
+      td.trade-card__cell
+        fieldset(data-name='UF_CURRENCY_TYPE').trade-card__field
+          select(name="Тип расчета").trade-card__select
+            option(value="RUB") RUB
+            option(value="EUR" selected) EUR
+            option(value="USD") USD
+            option(value="AED") AED
+            option(value="CNY") CNY

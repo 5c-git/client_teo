@@ -12,42 +12,68 @@ const numberSplitter = (num) => {
   return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
 };
 
+const getPriceType = (type) => {
+  switch (type) {
+    case 'RUB':
+      return 'руб';
+
+    case 'USD':
+      return 'дол';
+
+    case 'AED':
+      return 'дрх';
+
+    case 'CNY':
+      return 'юань';
+
+    case 'EUR':
+      return 'евр';
+
+    default:
+      return 'евр';
+  }
+};
+
 const updateFormValue = () => {
   const trade = document.querySelector('.trade');
   if (trade) {
     console.log('updateFormValue');
+
+    const UF_PAY_TYPE = trade.querySelector('[data-name="UF_PAY_TYPE"]').querySelector('select').value;
+    const UF_REALIZ_PLACE = trade.querySelector('[data-name="UF_REALIZ_PLACE"]').querySelector('select').value;
+    const UF_CURRENCY_TYPE = trade.querySelector('[data-name="UF_CURRENCY_TYPE"]').querySelector('select').value;
 
     const EXCHANGE = {
       RUB: 1.00,
     };
     const UF_PURCHASE_PRICE_SUM = {
       VALUE: 0,
-      CURRENCY: 'EUR',
+      CURRENCY: UF_CURRENCY_TYPE,
       RUB: 0,
     };
     const UF_PURCHASE_TRANSPORT_SUM = {
       VALUE: 0,
-      CURRENCY: 'EUR',
+      CURRENCY: UF_CURRENCY_TYPE,
       RUB: 0,
     };
     const UF_PURCHASE_DUTY_SUM = {
       VALUE: 0,
-      CURRENCY: 'EUR',
+      CURRENCY: UF_CURRENCY_TYPE,
       RUB: 0,
     };
     const UF_PURCHASE_INSURANCE_SUM = {
       VALUE: 0,
-      CURRENCY: 'EUR',
+      CURRENCY: UF_CURRENCY_TYPE,
       RUB: 0,
     };
     const UF_COST_PER_UNIT_SUM = {
       VALUE: 0,
-      CURRENCY: 'EUR',
+      CURRENCY: UF_CURRENCY_TYPE,
       RUB: 0,
     };
     const UF_PRODUCT_PRICE_NO_NDS_SUM = {
       VALUE: 0,
-      CURRENCY: 'EUR',
+      CURRENCY: UF_CURRENCY_TYPE,
       RUB: 0,
     };
 
@@ -66,18 +92,16 @@ const updateFormValue = () => {
       return rounded(+number / EXCHANGE[rate]);
     };
 
-
-    const UF_PAY_TYPE = trade.querySelector('[data-name="UF_PAY_TYPE"]').querySelector('select').value;
-    const UF_REALIZ_PLACE = trade.querySelector('[data-name="UF_REALIZ_PLACE"]').querySelector('select').value;
-
     const items = trade.querySelectorAll('.trade-card');
     items.forEach((item) => {
       const fields = item.querySelectorAll('.trade-card__field');
 
       const UF_PRICE = {};
       UF_PRICE.VALUE = Number(item.querySelector('[data-name="UF_PRICE"]').querySelector('input').value);
-      UF_PRICE.CURRENCY = item.querySelector('[data-name="UF_PRICE"]').querySelector('select').value;
+      UF_PRICE.CURRENCY = UF_CURRENCY_TYPE;
       UF_PRICE.RUB = UF_PRICE.VALUE * EXCHANGE[UF_PRICE.CURRENCY];
+      // Меняем тип валюты в поле "[data-name="UF_PRICE"]" на основе выбора в поле "Выбор основной валюты".
+      item.querySelector('[data-name="UF_PRICE"]').querySelector('span[name="CURRENCY"]').textContent = getPriceType(UF_PRICE.CURRENCY);
 
       const UF_QUANTITY = Number(item.querySelector('[data-name="UF_QUANTITY"]').querySelector('input').value);
 
@@ -117,15 +141,27 @@ const updateFormValue = () => {
 
       const UF_PRICE_PER_UNIT = {};
       UF_PRICE_PER_UNIT.VALUE = Number(item.querySelector('[data-name="UF_PRICE_PER_UNIT"]').querySelector('input').value);
+      UF_PRICE_PER_UNIT.CURRENCY = UF_CURRENCY_TYPE;
+      UF_PRICE_PER_UNIT.RUB = UF_PRICE_PER_UNIT.VALUE * EXCHANGE[UF_PRICE_PER_UNIT.CURRENCY];
+      // Меняем тип валюты в поле "[data-name="UF_PRICE_PER_UNIT"]" на основе выбора в поле "Выбор основной валюты".
+      item.querySelector('[data-name="UF_PRICE_PER_UNIT"]').querySelector('span[name="CURRENCY"]').textContent = getPriceType(UF_PRICE_PER_UNIT.CURRENCY);
 
       const UF_PRODUCT_PRICE_NO_NDS = {};
       UF_PRODUCT_PRICE_NO_NDS.VALUE = Number(item.querySelector('[data-name="UF_PRODUCT_PRICE_NO_NDS"]').querySelector('input').value);
+      UF_PRODUCT_PRICE_NO_NDS.CURRENCY = UF_CURRENCY_TYPE;
+      UF_PRODUCT_PRICE_NO_NDS.RUB = UF_PRODUCT_PRICE_NO_NDS.VALUE * EXCHANGE[UF_PRODUCT_PRICE_NO_NDS.CURRENCY];
+      // Меняем тип валюты в поле "[data-name="UF_PRODUCT_PRICE_NO_NDS"]" на основе выбора в поле "Выбор основной валюты".
+      item.querySelector('[data-name="UF_PRODUCT_PRICE_NO_NDS"]').querySelector('span[name="CURRENCY"]').textContent = getPriceType(UF_PRICE.CURRENCY);
 
       const UF_NDS = {};
       UF_NDS.VALUE = Number(item.querySelector('[data-name="UF_NDS"]').querySelector('input').value);
+      // Меняем тип валюты в поле "[data-name="UF_NDS"]" на основе выбора в поле "Выбор основной валюты".
+      item.querySelector('[data-name="UF_NDS"]').querySelector('span[name="CURRENCY"]').textContent = getPriceType(UF_PRICE.CURRENCY);
 
       const UF_PRODUCT_PRICE_NDS = {};
       UF_PRODUCT_PRICE_NDS.VALUE = Number(item.querySelector('[data-name="UF_PRODUCT_PRICE_NDS"]').querySelector('input').value);
+      // Меняем тип валюты в поле "[data-name="UF_PRODUCT_PRICE_NDS"]" на основе выбора в поле "Выбор основной валюты".
+      item.querySelector('[data-name="UF_PRODUCT_PRICE_NDS"]').querySelector('span[name="CURRENCY"]').textContent = getPriceType(UF_PRICE.CURRENCY);
 
 
       // Список автоматически вычисляемых полей.
@@ -152,18 +188,19 @@ const updateFormValue = () => {
           field.querySelector('input').value = UF_PURCHASE_PRICE.VALUE;
 
           UF_PURCHASE_PRICE.CURRENCY = UF_PRICE.CURRENCY;
-          field.querySelector('select').value = UF_PURCHASE_PRICE.CURRENCY;
+          field.querySelector('span[name="CURRENCY"]').textContent = getPriceType(UF_PURCHASE_PRICE.CURRENCY);
 
           UF_PURCHASE_PRICE.RUB = UF_PURCHASE_PRICE.VALUE * EXCHANGE[UF_PURCHASE_PRICE.CURRENCY];
           UF_PURCHASE_PRICE_SUM.RUB += UF_PURCHASE_PRICE.RUB;
         }
 
-        // Это поле задаёт дальнейшую валюту по умолчанию, т.е. евро.
         if (fieldName == 'UF_COST_PER_UNIT') {
           const RUB = UF_PURCHASE_PRICE.RUB + UF_PURCHASE_TRANSPORT_RUB.RUB + UF_PURCHASE_TRANSPORT_VAL.RUB + UF_PURCHASE_DUTY.RUB + UF_DECLARATION.RUB;
-          const CURRENCY = field.querySelector('select').value;
+          const CURRENCY = UF_PURCHASE_PRICE.CURRENCY;
           UF_COST_PER_UNIT.VALUE = exchange(RUB, CURRENCY);
+
           field.querySelector('input').value = UF_COST_PER_UNIT.VALUE;
+          field.querySelector('span[name="CURRENCY"]').textContent = getPriceType(CURRENCY);
 
           UF_COST_PER_UNIT_SUM.RUB += RUB;
         }
@@ -190,9 +227,11 @@ const updateFormValue = () => {
 
         if (fieldName == 'UF_PRODUCT_PRICE_NO_NDS') {
           UF_PRODUCT_PRICE_NO_NDS.VALUE = rounded(UF_PRICE_PER_UNIT.VALUE * UF_QUANTITY);
+
           field.querySelector('input').value = UF_PRODUCT_PRICE_NO_NDS.VALUE;
 
           UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE += UF_PRODUCT_PRICE_NO_NDS.VALUE;
+          UF_PRODUCT_PRICE_NO_NDS_SUM.RUB = (UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE * EXCHANGE[UF_PRODUCT_PRICE_NO_NDS_SUM.CURRENCY]);
         }
 
         if (fieldName == 'UF_NDS') {
@@ -218,32 +257,50 @@ const updateFormValue = () => {
 
       if (fieldName == 'UF_PURCHASE_PRICE_SUM') {
         UF_PURCHASE_PRICE_SUM.VALUE = exchange(UF_PURCHASE_PRICE_SUM.RUB, UF_PURCHASE_PRICE_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_PRICE_SUM.VALUE);
+
+        const value = numberSplitter(UF_PURCHASE_PRICE_SUM.VALUE);
+        const typeValue = getPriceType(UF_CURRENCY_TYPE);
+        field.querySelector('.total__value').parentElement.innerHTML = `<td class="total__cell total__cell--price"><span class="total__value">${value}</span> ${typeValue}</td>`;
       }
 
       if (fieldName == 'UF_PURCHASE_TRANSPORT_SUM') {
-        console.log(UF_PURCHASE_TRANSPORT_SUM);
         UF_PURCHASE_TRANSPORT_SUM.VALUE = exchange(UF_PURCHASE_TRANSPORT_SUM.RUB, UF_PURCHASE_TRANSPORT_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_TRANSPORT_SUM.VALUE);
+
+        const value = numberSplitter(UF_PURCHASE_TRANSPORT_SUM.VALUE);
+        const typeValue = getPriceType(UF_CURRENCY_TYPE);
+        field.querySelector('.total__value').parentElement.innerHTML = `<td class="total__cell total__cell--price"><span class="total__value">${value}</span> ${typeValue}</td>`;
       }
 
       if (fieldName == 'UF_PURCHASE_DUTY_SUM') {
         UF_PURCHASE_DUTY_SUM.VALUE = exchange(UF_PURCHASE_DUTY_SUM.RUB, UF_PURCHASE_DUTY_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_DUTY_SUM.VALUE);
+
+        const value = numberSplitter(UF_PURCHASE_DUTY_SUM.VALUE);
+        const typeValue = getPriceType(UF_CURRENCY_TYPE);
+        field.querySelector('.total__value').parentElement.innerHTML = `<td class="total__cell total__cell--price"><span class="total__value">${value}</span> ${typeValue}</td>`;
       }
 
       if (fieldName == 'UF_PURCHASE_INSURANCE_SUM') {
         UF_PURCHASE_INSURANCE_SUM.VALUE = exchange(UF_PURCHASE_INSURANCE_SUM.RUB, UF_PURCHASE_INSURANCE_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = numberSplitter(UF_PURCHASE_INSURANCE_SUM.VALUE);
+
+        const value = numberSplitter(UF_PURCHASE_INSURANCE_SUM.VALUE);
+        const typeValue = getPriceType(UF_CURRENCY_TYPE);
+        field.querySelector('.total__value').parentElement.innerHTML = `<td class="total__cell total__cell--price"><span class="total__value">${value}</span> ${typeValue}</td>`;
       }
 
       if (fieldName == 'UF_COST_PER_UNIT_SUM') {
         UF_COST_PER_UNIT_SUM.VALUE = exchange(UF_COST_PER_UNIT_SUM.RUB, UF_COST_PER_UNIT_SUM.CURRENCY);
-        field.querySelector('.total__value').textContent = numberSplitter(UF_COST_PER_UNIT_SUM.VALUE);
+
+        const value = numberSplitter(UF_COST_PER_UNIT_SUM.VALUE);
+        const typeValue = getPriceType(UF_CURRENCY_TYPE);
+        field.querySelector('.total__value').parentElement.innerHTML = `<td class="total__cell total__cell--price"><span class="total__value">${value}</span> ${typeValue}</td>`;
       }
 
       if (fieldName == 'UF_PRODUCT_PRICE_NO_NDS_SUM') {
-        field.querySelector('.total__value').textContent = numberSplitter(UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE);
+        UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE = exchange(UF_PRODUCT_PRICE_NO_NDS_SUM.RUB, UF_PRODUCT_PRICE_NO_NDS_SUM.CURRENCY);
+
+        const value = numberSplitter(UF_PRODUCT_PRICE_NO_NDS_SUM.VALUE);
+        const typeValue = getPriceType(UF_CURRENCY_TYPE);
+        field.querySelector('.total__value').parentElement.innerHTML = `<td class="total__cell total__cell--price"><span class="total__value">${value}</span> ${typeValue}</td>`;
       }
 
       if (fieldName == 'PROFIT_RATE') {
@@ -318,10 +375,7 @@ if (trade) {
 
     tradeCard.querySelector('[data-name="UF_POS_NAME"]').querySelector('input').value = UF_POS_NAME;
 
-    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
-    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('input').value = UF_PRICE.VALUE;
-
-    tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
+    // tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('select').value = UF_PRICE.CURRENCY;
     tradeCard.querySelector('[data-name="UF_PRICE"]').querySelector('input').value = UF_PRICE.VALUE;
 
     tradeCard.querySelector('[data-name="UF_PROVIDER"]').querySelector('select').value = UF_PROVIDER;

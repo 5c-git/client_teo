@@ -60,14 +60,7 @@
       <fieldset class="trade-card__field" data-name="UF_PRICE">
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" value="" name="Цена за ед.">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="RUB" selected>руб</option>
-          <option value="EUR">евр</option>
-          <option value="USD">дол</option>
-          <option value="AED">дрх</option>
-          <option value="CNY">юань</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">руб</span>
       </fieldset>
     </td>
     <td class="trade-card__cell">
@@ -110,14 +103,7 @@
       <fieldset class="trade-card__field" data-name="UF_PURCHASE_PRICE" disabled>
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" value="" name="Цена закупки за ед.">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="RUB" selected>руб</option>
-          <option value="EUR">евр</option>
-          <option value="USD">дол</option>
-          <option value="AED">дрх</option>
-          <option value="CNY">юань</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">евр</span>
       </fieldset>
     </td>
     <td class="trade-card__cell">
@@ -209,10 +195,7 @@
       <fieldset class="trade-card__field" data-name="UF_COST_PER_UNIT" disabled>
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" name="Себестоимость за ед." placeholder="" autocomplete="off" autocapitalize="off">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="EUR" selected>евр</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">евр</span>
       </fieldset>
     </td>
     <td class="trade-card__cell">
@@ -226,40 +209,28 @@
       <fieldset class="trade-card__field" data-name="UF_PRICE_PER_UNIT">
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" name="Цена продажи за ед." placeholder="" autocomplete="off" autocapitalize="off">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="EUR" selected>евр</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">евр</span>
       </fieldset>
     </td>
     <td class="trade-card__cell">
       <fieldset class="trade-card__field" data-name="UF_PRODUCT_PRICE_NO_NDS" disabled>
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" name="Стоимость товара без НДС" placeholder="" autocomplete="off" autocapitalize="off">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="EUR" selected>евр</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">евр</span>
       </fieldset>
     </td>
     <td class="trade-card__cell">
       <fieldset class="trade-card__field" data-name="UF_NDS" disabled>
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" name="НДС" placeholder="" autocomplete="off" autocapitalize="off">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="EUR" selected>евр</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">евр</span>
       </fieldset>
     </td>
     <td class="trade-card__cell">
       <fieldset class="trade-card__field" data-name="UF_PRODUCT_PRICE_NDS" disabled>
         <div class="trade-card__input-inner">
           <input class="trade-card__input" type="number" name="Стоимость товара с НДС" placeholder="" autocomplete="off" autocapitalize="off">
-        </div>
-        <select class="trade-card__select" name="CURRENCY">
-          <option value="EUR" selected>евр</option>
-        </select>
+        </div><span class="trade-card__select" name="CURRENCY">евр</span>
       </fieldset>
     </td>
   </tr>
@@ -313,8 +284,9 @@
 <div class="trade-type">
   <table class="trade-type__table">
     <tr class="trade-type__table-header">
-      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title trade-type__table-title--right">Место реализации</span></th>
-      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title trade-type__table-title--right">Тип расчета</span></th>
+      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title">Место реализации</span></th>
+      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title">Тип расчета</span></th>
+      <th class="trade-type__cell-head" style="width: 200px;"><span class="trade-type__table-title">Выбор основной валюты</span></th>
     </tr>
     <tr>
       <td class="trade-card__cell">
@@ -330,6 +302,17 @@
           <select class="trade-card__select" name="Тип расчета">
             <option value="Прямая продажа">Прямая продажа</option>
             <option value="Тендер">Тендер</option>
+          </select>
+        </fieldset>
+      </td>
+      <td class="trade-card__cell">
+        <fieldset class="trade-card__field" data-name="UF_CURRENCY_TYPE">
+          <select class="trade-card__select" name="Тип расчета">
+            <option value="RUB">RUB</option>
+            <option value="EUR" selected>EUR</option>
+            <option value="USD">USD</option>
+            <option value="AED">AED</option>
+            <option value="CNY">CNY</option>
           </select>
         </fieldset>
       </td>

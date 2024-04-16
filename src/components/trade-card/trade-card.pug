@@ -24,12 +24,7 @@ template#trade-card
       fieldset(data-name='UF_PRICE').trade-card__field
         div.trade-card__input-inner
           input(type='number' value='' name='Цена за ед.').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="RUB" selected) руб
-          option(value="EUR") евр
-          option(value="USD") дол
-          option(value="AED") дрх
-          option(value="CNY") юань
+        span(name="CURRENCY").trade-card__select руб
 
 
     td.trade-card__cell
@@ -64,12 +59,7 @@ template#trade-card
       fieldset(data-name='UF_PURCHASE_PRICE' disabled).trade-card__field
         div.trade-card__input-inner
           input(type='number' value='' name='Цена закупки за ед.').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="RUB" selected) руб
-          option(value="EUR") евр
-          option(value="USD") дол
-          option(value="AED") дрх
-          option(value="CNY") юань
+        span(name="CURRENCY").trade-card__select евр
 
     td.trade-card__cell
       fieldset(data-name='UF_PURCHASE_BASIS').trade-card__field
@@ -141,8 +131,7 @@ template#trade-card
       fieldset(data-name='UF_COST_PER_UNIT' disabled).trade-card__field
         div.trade-card__input-inner
           input(type='number' name='Себестоимость за ед.' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="EUR" selected) евр
+        span(name="CURRENCY").trade-card__select евр
 
 
     td.trade-card__cell
@@ -154,26 +143,22 @@ template#trade-card
       fieldset(data-name='UF_PRICE_PER_UNIT').trade-card__field
         div.trade-card__input-inner
           input(type='number' name='Цена продажи за ед.' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="EUR" selected) евр
+        span(name="CURRENCY").trade-card__select евр
 
     td.trade-card__cell
       fieldset(data-name='UF_PRODUCT_PRICE_NO_NDS' disabled).trade-card__field
         div.trade-card__input-inner
           input(type='number' name='Стоимость товара без НДС' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="EUR" selected) евр
+        span(name="CURRENCY").trade-card__select евр
 
     td.trade-card__cell
       fieldset(data-name='UF_NDS' disabled).trade-card__field
         div.trade-card__input-inner
           input(type='number' name='НДС' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="EUR" selected) евр
+        span(name="CURRENCY").trade-card__select евр
 
     td.trade-card__cell
       fieldset(data-name='UF_PRODUCT_PRICE_NDS' disabled).trade-card__field
         div.trade-card__input-inner
           input(type='number' name='Стоимость товара с НДС' placeholder='' autocomplete='off' autocapitalize='off').trade-card__input
-        select(name="CURRENCY").trade-card__select
-          option(value="EUR" selected) евр
+        span(name="CURRENCY").trade-card__select евр
